@@ -1,0 +1,83 @@
+configureStore(): wraps createStore to provide simplified configuration options and good defaults. It can automatically combine your slice reducers, adds whatever Redux middleware you supply, includes redux-thunk by default, and enables use of the Redux DevTools Extension.
+
+createApi(): The core of RTK (redux/toolkit) Query's functionality. It allows you to define a set of endpoints describe how to retrieve data from a series of endpoints, including configuration of how to fetch and transform that data. In most cases, you should use this once per app, with "one API slice per base URL" as a rule of thumb.
+
+
+fetchBaseQuery(): A small wrapper around fetch that aims to simplify requests. Intended as the recommended baseQuery to be used in createApi for the majority of users.
+
+import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
+interface CounterState {
+  value: number
+}
+const initialState = { value: 0 } as CounterState
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState,
+  reducers: {
+    increment(state) {
+      state.value++
+    },
+    decrement(state) {
+      state.value--
+    },
+    incrementByAmount(state, action: PayloadAction<number>) {
+      state.value += action.payload
+    },
+  },
+})
+export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export default counterSlice.reducer
+
+
+
+
+Note:
+slice is combination of reducers
+
+
+//action = { 
+  payload:{
+    data:(50)[{… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }, {… }],
+  i:2,
+  song:{ 
+    layout: '5', 
+    type: 'MUSIC', 
+    key: '632531170', 
+    title: 'Unholy', 
+    subtitle: 'Sam Smith & Kim Petras', … 
+  }
+  },
+  type:"player/setActiveSong" 
+}
+    
+      //song = { 
+      artists: [{ alias: 'jin', id: '42', adamid: '1191850724' }],
+      highlightsurls:{ },
+      hub:{ 
+        type: 'APPLEMUSIC', 
+        image: 'https://images.shazam.com/static/icons/hub/web/v5/applemusic.png', 
+        actions: Array(2), 
+        options: Array(1), 
+        explicit: false, … 
+      },
+      images:{ 
+        background: 'https://is5-ssl.mzstatic.com/image/thumb/Music122/…b8e-30b6-16531daf8b94/pr_source.png/800x800cc.jpg', 
+        coverart: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/…253b-299eaf34eb5e/8809829712307.jpg/400x400cc.jpg', 
+        coverarthq: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/…253b-299eaf34eb5e/8809829712307.jpg/400x400cc.jpg', 
+        joecolor: 'b:221e1fp:d4d6cfs:d3d8aet:b0b1acq:b0b391' 
+      },
+      key:"590865488",
+      layout:"5",
+      properties:{ },
+      share:{ 
+        subject: 'Yours - JIN', 
+        text: 'I used Shazam to discover Yours by JIN.', 
+        href: 'https://www.shazam.com/track/590865488/yours', 
+        image: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/…253b-299eaf34eb5e/8809829712307.jpg/400x400cc.jpg', 
+        twitter: 'I used @Shazam to discover Yours by JIN.', … 
+      },
+      subtitle:"JIN",
+      title:"Yours",
+      type:"MUSIC",
+      url:"https://www.shazam.com/track/590865488/yours"}
